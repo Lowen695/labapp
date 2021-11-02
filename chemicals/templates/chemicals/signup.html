@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/2e024deabd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="login_box" style="margin-top: 5%">
+      <h1>Sign up</h1>
+        <form class="form" method="POST" action="">
+            {% csrf_token %}
+
+            <div class="item">
+                <input placeholder="Username" class="label1" readonly="readonly">
+                {{form.username}}
+            </div>
+            <div class="item">
+                <input placeholder="First name" class="label1" readonly="readonly">
+                {{form.first_name}}
+            </div>
+             <div class="item">
+                <input placeholder="Last name" class="label1" readonly="readonly">
+                 {{form.last_name}}
+            </div>
+            <div class="item">
+                <input placeholder="password" class="label1" readonly="readonly">
+                {{form.password1}}
+            </div>
+            <div class="item">
+                <input placeholder="password confirm" class="label1" readonly="readonly">
+
+                {{form.password2}}
+            </div>
+            <div class="item">
+                <input placeholder="email" class="label1" readonly="readonly">
+                {{form.email}}
+            </div>
+            <button type="submit" class="loginbutton" >Sign up </button>
+        </form>
+<!--      {{form.errors}}-->
+        {% for message in messages %}
+            <div style="font-size: 14px; color: deeppink;padding-top: 5px">{{message}}</div>
+        {% endfor %}
+           <div style="font-size: 14px; color: deeppink;padding-top: 5px">{{form.errors}}</div>
+      <div class="signuplink">Already have an account? <span><a href="/login/" style="color: deeppink">Login</a></span></div>
+    </div>
+</body>
+
+     <div class="row" style="position: relative; bottom: 10px; width: 100%; padding-top: 100px">
+		<div class="col-md-12 copy">
+			<p class="text-center" style="color: lightgrey">&copy; Copyright 2021 - FAHUI LIU.  All rights reserved.</p>
+		</div>
+	</div>
+
+</html>

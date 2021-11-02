@@ -1,0 +1,67 @@
+body{
+    background-image: url('/static/images/bg-enterchemical.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+#login_box {
+    width: 35%;
+    height: auto;
+    background: rgba(0,0,0,0.5);
+    margin: 0 auto;
+    margin-top: 15%;
+    text-align: center;
+    padding-top: 20px;
+    color: white;
+}
+
+#login_box .form {
+    margin-top: 30px;
+}
+
+#login_box .form .item input {
+    width: 160px;
+    border: 0;
+    border-bottom: 2px solid white;
+    padding: 5px 10px;
+    background-color: rgba(0,0,0,0);
+    color: white;
+    text-align: center;
+}
+
+#login_box .form .item .label1 {
+    width: 100px;
+    border: 0;
+    padding: 0px 0px;
+    background-color: rgba(0,0,0,0);
+    color: darkgrey;
+    text-align: right;
+}
+
+#login_box .form .item {
+    margin-top: 10px;
+}
+
+#login_box .loginbutton {
+    margin-top: 30px;
+    width: 120px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    background-color: rgba(128,200,240,0.5);
+    color: white;
+}
+
+#login_box .loginbutton:hover {
+    background-color: rgba(200,200,240,0.8);
+    color: deeppink;
+}
+
+#login_box .signuplink {
+    margin-top: 3px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    color: #e8e8e8;
+    font-size: 12px;
+}
+
+

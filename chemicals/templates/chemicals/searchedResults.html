@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Searched results</title>
+
+    <style>
+	.demo {
+        background-color: rgba(255,255,255,0.8);
+        width: 80%;
+		padding:5px;
+		margin-left: auto;
+        margin-right: auto;
+	}
+	.demo caption {
+		text-align:center;
+	}
+	.demo th {
+		padding:5px;
+		background:#F0F0F0;
+	}
+	.demo td {
+		padding:5px;
+	}
+    body {
+          background-image: url('/static/images/bg-enterchemical.png');
+          background-repeat: repeat-y;
+          background-size: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="navbar navbar-inverse" style = 'background-color: rgba(122,186,255,0.5);position: sticky;top: 0'>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse">
+							<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="/start/" class="navbar-brand">
+                            <image src="/static/images/keilogo.png" width="120" height="30"></image>
+                        </a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav" >
+                            <li class="active"><a href="/start/">Home</a></li>
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Chemicals <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/home/">Chemical list</a></li>
+                                    <li><a href="/enterchemical/">Enter chemical</a></li>
+                                    <li><a href="#">About this program</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="https://ke-instruments.com/"
+                                   style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'" target="_blank">Links</a></li>
+                            <li><a href="#" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Userguide</a></li>
+                            <li><a href="#" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Contact Us</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li><a href="#" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Hello,{{request.user}}</a></li>
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'"><span class="glyphicon glyphicon-log-in"></span> Logout / Sign Up <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'logout' %}" >Logout</a></li>
+                                    <li><a href="/signup/">Sign Up</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<table class="demo">
+
+	<h3 align="center" style="color: white;padding-top: 40px;font-size: 30px;padding-bottom: 30px"><strong>  Searched results  </strong></h3>
+
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>name</th>
+		<th>Vendor</th>
+		<th>experiment</th>
+		<th>arrive_date</th>
+		<th>expire_date</th>
+		<th>Action</th>
+
+	</tr>
+	</thead>
+	<tbody>
+	{% for chemical in chemical %}
+	<tr>
+		<td style="text-align:center">
+			<a href="/detail/{{chemical.id}}" >{{chemical.id}} </a></td>
+		<td>{{chemical.name}}</td>
+		<td>{{chemical.vender}}</td>
+		<td>{{chemical.experiment}}</td>
+		<td>{{chemical.arrive_date}}</td>
+		<td>{{chemical.expire_date}}</td>
+		<td><button>
+			<a href="/delete/{{chemical.id}}" style="text-decoration: none"
+			   onclick="return confirm('Are you sure to DELETE this item?')" >
+				Delete {{chemical.id}}
+			</a>
+		</button>
+        </td>
+
+	</tr>
+	{% endfor %}
+
+	</tbody>
+</table>
+    {% if not chemical %}
+      <textarea type="button" style="margin-left: 10%; background-color: rgba(0,0,0,0);margin-top: 20px;border: none;
+      color: white; font-size: 16px; readonly:'readonly';margin-bottom: 10px">No chemical matches
+      </textarea>
+    {% endif  %}
+    <br>
+
+
+    <br>
+<br>
+<br>
+</body>
+
+    <div class="row">
+		<div class="col-md-12 copy">
+			<p class="text-center" style="color: lightgrey">&copy; Copyright 2021 - FAHUI LIU.  All rights reserved.</p>
+		</div>
+	</div>
+
+</html>

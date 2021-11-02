@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/static/images/keilogo.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <title>HOMEstart</title>
+
+    <style>
+        body {
+          background-image: url('/static/images/bg-enterchemical.png');
+          background-repeat: no-repeat;
+          background-size: 100%;
+        }
+        .divset {
+    width: 600px;
+    height: 300px;
+    padding: 13px;
+    box-shadow: 0px 0px 2px 2px skyblue;
+    position: relative;
+    left: 0.4%;
+    top: 0;
+    margin: 120px auto;
+
+    background-color: rgba(240, 255, 255, 0);
+
+    border-radius: 10px;
+    text-align: center;
+        }
+    .button1 {
+        color: white;
+        background-color: rgba(122,186,255,0.5);
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        padding: 8px 30px;
+    }
+    .button1:hover {
+      background-color: rgba(200,186,255,0.8); /* Green */
+      color:mediumvioletred;
+       }
+    </style>
+
+</head>
+<body>
+
+
+<div class="navbar navbar-inverse sticky-top" style = 'background-color: rgba(122,186,255,0.5);position: sticky;top: 0'>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse">
+							<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="/start/" class="navbar-brand">
+                            <image src="/static/images/keilogo.png" width="120" height="30"></image>
+                        </a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav" >
+                            <li class="active"><a href="/start/">Home</a></li>
+                            <li><a href="/home_page/" class="dropdown-toggle" data-toggle="dropdown" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Chemicals <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/home/">Chemical list</a></li>
+                                    <li><a href="/enterchemical/">Enter chemical</a></li>
+                                    <li><a href="#">About this program</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="https://ke-instruments.com/"
+                                   style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Links</a></li>
+                            <li><a href="#" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Userguide</a></li>
+                            <li><a href="#" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'">Contact Us</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #fefefe" onMouseOver="this.style.color='skyblue'"
+                                   onMouseOut="this.style.color='#fefefe'"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/login/" >Login</a></li>
+                                    <li><a href="/signup/">Sign Up</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+   <div class="divset" >
+       <h1 style="color: #fefefe">Chemical management system</h1>
+       <h3 style="color: #fefefe; alignment: left">For storing KEI laboratory materials</h3>
+       <h2 >
+            <image src="/static/images/keilogo.png" width="180" height="70"></image>
+       </h2>
+       <br>
+       <input type="button" value="START" class="button1" onclick="location.href='/login/'">
+   </div>
+</body>
+    <div class="row">
+		<div class="col-md-12 copy">
+			<p class="text-center" style="color: lightgrey">&copy; Copyright 2021 - FAHUI LIU.  All rights reserved.</p>
+		</div>
+	</div>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>loginpage</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div id="login_box">
+      <h1>Login</h1>
+        <form method="POST" action="" class="form">
+            {%  csrf_token %}
+            <div class="item">
+
+                <input type="text" placeholder="Username" name="username">
+            </div>
+            <div class="item">
+
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <button type="submit" class="loginbutton">Login</button>
+        </form>
+      {% for message in messages %}
+            <div style="font-size: 14px; color: deeppink;padding-top: 5px">{{message}}</div>
+        {% endfor %}
+      <div class="signuplink">Don't have an account? <span><a href="/signup/" style="color: deeppink">Sign up</a></span></div>
+    </div>
+</body>
+
+    <div class="row" style="position: relative; bottom: 10px; width: 100%; padding-top: 100px">
+		<div class="col-md-12 copy">
+			<p class="text-center" style="color: lightgrey">&copy; Copyright 2021 - FAHUI LIU.  All rights reserved.</p>
+		</div>
+	</div>
+
+</html>
