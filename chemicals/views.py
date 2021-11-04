@@ -133,7 +133,7 @@ def logoutUser(request):
 def searchedResults(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        chemical = chemicals.objects.filter(Q(name__contains = searched) | Q(id__contains = searched))
+        chemical = chemicals.objects.filter(Q(name__icontains = searched) | Q(id__contains = searched))
         return render(request, 'chemicals/searchedResults.html',{'chemical':chemical})
 
 def print(request,id):
