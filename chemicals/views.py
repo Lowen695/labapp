@@ -11,12 +11,12 @@ from django.db.models import Q
 
 @login_required(login_url='login')
 def home_page(request):
-    chemical = chemicals.objects.all()
+    chemical = chemicals.objects.all().order_by('-id')
     context = {'chemical':chemical}
     return render(request,'chemicals/home_page.html',context)
 
 def startpage(request):
-    chemical = chemicals.objects.all()
+    chemical = chemicals.objects.all().order_by('-id')
     context = {'chemical':chemical}
     return render(request,'chemicals/start.html',context)
 
