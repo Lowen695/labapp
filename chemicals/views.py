@@ -32,7 +32,7 @@ def addtosql(request):
     temperature = request.POST['TEMPERATURE']
     vender = request.POST['vender']
     experiment = request.POST['experiment']
-    operator = request.user
+    operator = request.user.username
     register = chemicals(name = name,
                          CAT = cat,
                          LOT = lot,
@@ -82,7 +82,7 @@ def modifysql(request):
     chemical.experiment = experiment
     chemical.arrive_date = adate
     chemical.expire_date = edate
-    chemical.operator = request.user
+    chemical.operator = request.user.username
     chemical.save()
     return redirect('/home/')
 
