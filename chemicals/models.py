@@ -23,7 +23,7 @@ class chemicals(models.Model):
     experiment = models.CharField(max_length=15)
     arrive_date = models.DateField()
     expire_date = models.DateField()
-    operator = models.CharField(max_length=20,default='ABCD')
+    operator = models.CharField(max_length=100,default='ABCD')
     #agent = models.ForeignKey('Agent', on_delete=models.CASCADE)
     def __str__(self):
         return self.name
