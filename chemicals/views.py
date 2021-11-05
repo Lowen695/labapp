@@ -27,13 +27,21 @@ def addtosql(request):
     adate = datetime.strptime(adate,'%Y-%m-%d').strftime('%Y-%m-%d')
     edate = datetime.strptime(edate, '%Y-%m-%d').strftime('%Y-%m-%d')
     name = request.POST['name']
+    cat = request.POST['CAT']
+    lot = request.POST['LOT']
+    temperature = request.POST['TEMPERATURE']
     vender = request.POST['vender']
     experiment = request.POST['experiment']
+    operator = request.user.email
     register = chemicals(name = name,
+                         CAT = cat,
+                         LOT = lot,
+                         temperature = temperature,
                          vender = vender,
                          experiment = experiment,
                          arrive_date = adate,
-                         expire_date= edate
+                         expire_date= edate,
+                         operator = operator
                          )
     register.save()
     return redirect('/home/')
@@ -56,6 +64,9 @@ def detailpage2(request, id):
 def modifysql(request):
     itemid = request.POST['itemid']
     name = request.POST['name']
+    cat = request.POST['CAT']
+    lot = request.POST['LOT']
+    temperature = request.POST['TEMPERATURE']
     vender = request.POST['vender']
     experiment = request.POST['experiment']
     adate = request.POST['arrive_date']
@@ -64,10 +75,14 @@ def modifysql(request):
     edate = datetime.strptime(edate, '%Y-%m-%d').strftime('%Y-%m-%d')
     chemical =  chemicals.objects.get(id=itemid)
     chemical.name = name
+    chemical.CAT = cat
+    chemical.LOT = lot
+    chemical.temperature = temperature
     chemical.vender = vender
     chemical.experiment = experiment
     chemical.arrive_date = adate
     chemical.expire_date = edate
+    chemical.operator = request.user.email
     chemical.save()
     return redirect('/home/')
 

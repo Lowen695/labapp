@@ -270,6 +270,28 @@ position: sticky;top: 0;z-index:1'>
           <label for="name">Name<span>*</span></label>
           <input id="name" type="text" name="name" required/>
         </div>
+
+          <div class="item">
+          <label for="cat">CAT number<span>*</span></label>
+          <input id="cat" type="text" name="CAT" required/>
+        </div>
+
+          <div class="item">
+          <label for="lot">Lot number<span>*</span></label>
+          <input id="lot" type="text" name="LOT" required/>
+        </div>
+
+
+          <div class="item">
+          <label for="temperature">Storage temperature<span>*</span></label><br>
+<!--          <input id="temperature" type="text" name="TEMPERATURE" required/>-->
+              <select name="TEMPERATURE" id="temperature" style="width: 99%">
+                  <option value="RT">RT</option>
+                  <option value="4°C">4</option>
+                  <option value="-20°C">-20</option>
+                </select>
+        </div>
+
         <div class="item">
           <label for="vender">Vendors<span>*</span></label>
           <input id="vender" type="text" name="vender" required/>

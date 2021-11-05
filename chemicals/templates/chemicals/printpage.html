@@ -37,14 +37,30 @@
                  class="labels">Name:</label>
             </td>
             <td><input type="text" name="labelTextArea" id="labelTextArea" rows='2' placeholder="{{chemical.id}}"
-                 value="{{chemical.id}} {{chemical.name}}" readonly="readonly" style="font-size: 12px"></input>
+                 value="{{chemical.name}}" readonly="readonly" style="font-size: 12px"></input>
             </td>
         </tr>
 
         <tr>
-            <td style="text-align: right; width: 60px;position: relative;padding-left: 20px"><label for="labelexperiment" class="labels">experiment:</label></td>
-            <td><input type="text" name="labelexperiment" id="labelexperiment" rows='2' placeholder="{{chemical.experiment}}"
-                      value="{{chemical.experiment}}" readonly="readonly"></input>
+            <td style="text-align: right; width: 60px;position: relative;padding-left: 20px">
+                <label for="CAT" class="labels">CAT number:</label></td>
+            <td><input type="text" name="CAT" id="CAT" rows='2' placeholder="{{chemical.CAT}}"
+                      value="{{chemical.CAT}}" readonly="readonly"></input>
+            </td>
+        </tr>
+
+          <tr>
+            <td style="text-align: right; width: 60px;position: relative;padding-left: 20px">
+                <label for="temp" class="labels">Store temp:</label></td>
+            <td><input type="text" name="temp" id="temp" rows='2' placeholder="{{chemical.temperature}}"
+                      value="{{chemical.temperature}}" readonly="readonly"></input>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-align: right; width: 60px;position: relative;padding-left: 20px"><label for="itemid" class="labels">ID:</label></td>
+            <td><input type="text" name="itemid" id="itemid" rows='2' placeholder="{{chemical.id}}"
+                      value="{{chemical.id}}" readonly="readonly"></input>
             </td>
         </tr>
 
@@ -56,8 +72,8 @@
         </tr>
 
         <tr>
-            <td style="text-align: right; width: 60px;position: relative;padding-left: 20px"><label for="copies" class="labels">Copies:</label></td>
-            <td><input type="text" name="copies" id="copies" rows='2' placeholder="how many copies"></input></td>
+            <td style="text-align: right; width: 60px;position: relative;padding-left: 20px"><label for="copies" class="labels">Copies:<span style="color: red"> * </span></label></td>
+            <td><input type="text" name="copies" id="copies" rows='2' placeholder="number of copies"></input></td>
         </tr>
 
         <tr>
@@ -65,8 +81,6 @@
             <td><select id="printersComboBox"></select></td>
             <td style="padding-left: 5px; font-size: 8px">  Name printers to "SMALL LABEL" and "BIG LABEL" first </td>
         </tr>
-
-
 
 
         </table>

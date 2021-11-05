@@ -116,11 +116,16 @@
 	<tr>
 		<th>ID</th>
 		<th>name</th>
+        <th>CAT number</th>
+        <th>LOT number</th>
+        <th>Storage temp</th>
 		<th>Vendor</th>
 		<th>experiment</th>
 		<th>arrive_date</th>
 		<th>expire_date</th>
+        <th>Operator</th>
 		<th>Action</th>
+
 
 	</tr>
 	</thead>
@@ -130,10 +135,14 @@
 		<td style="text-align:center">
 			<a href="/detail/{{chemical.id}}" >{{chemical.id}} </a></td>
 		<td>{{chemical.name}}</td>
+        <td>{{chemical.CAT}}</td>
+        <td>{{chemical.LOT}}</td>
+        <td>{{chemical.temperature}}</td>
 		<td>{{chemical.vender}}</td>
 		<td>{{chemical.experiment}}</td>
 		<td>{{chemical.arrive_date}}</td>
 		<td>{{chemical.expire_date}}</td>
+        <td>{{chemical.operator}}</td>
 		<td><button>
 			<a href="/delete/{{chemical.id}}" style="text-decoration: none"
 			   onclick="return confirm('Are you sure to DELETE this item?')" >
