@@ -17,8 +17,7 @@
 //----------------------------------------------------------------------------
 
 
-(function()
-{
+(function () {
     // utility functions from goog.dom
 
     /**
@@ -26,18 +25,18 @@
      * @enum {number}
      */
     var NodeType = {
-      ELEMENT: 1,
-      ATTRIBUTE: 2,
-      TEXT: 3,
-      CDATA_SECTION: 4,
-      ENTITY_REFERENCE: 5,
-      ENTITY: 6,
-      PROCESSING_INSTRUCTION: 7,
-      COMMENT: 8,
-      DOCUMENT: 9,
-      DOCUMENT_TYPE: 10,
-      DOCUMENT_FRAGMENT: 11,
-      NOTATION: 12
+        ELEMENT: 1,
+        ATTRIBUTE: 2,
+        TEXT: 3,
+        CDATA_SECTION: 4,
+        ENTITY_REFERENCE: 5,
+        ENTITY: 6,
+        PROCESSING_INSTRUCTION: 7,
+        COMMENT: 8,
+        DOCUMENT: 9,
+        DOCUMENT_TYPE: 10,
+        DOCUMENT_FRAGMENT: 11,
+        NOTATION: 12
     };
 
 
@@ -45,14 +44,14 @@
      * Removes all the child nodes on a DOM node.
      * @param {Node} node Node to remove children from.
      */
-    var removeChildren = function(node) {
-      // Note: Iterations over live collections can be slow, this is the fastest
-      // we could find. The double parenthesis are used to prevent JsCompiler and
-      // strict warnings.
-      var child;
-      while ((child = node.firstChild)) {
-        node.removeChild(child);
-      }
+    var removeChildren = function (node) {
+        // Note: Iterations over live collections can be slow, this is the fastest
+        // we could find. The double parenthesis are used to prevent JsCompiler and
+        // strict warnings.
+        var child;
+        while ((child = node.firstChild)) {
+            node.removeChild(child);
+        }
     };
 
     /**
@@ -60,12 +59,12 @@
      * @param {Node|Window} node The node to get the document for.
      * @return {!Document} The document owning the node.
      */
-    var getOwnerDocument = function(node) {
-      // TODO(user): Remove IE5 code.
-      // IE5 uses document instead of ownerDocument
-      return /** @type {!Document} */ (
-          node.nodeType == NodeType.DOCUMENT ? node :
-          node.ownerDocument || node.document);
+    var getOwnerDocument = function (node) {
+        // TODO(user): Remove IE5 code.
+        // IE5 uses document instead of ownerDocument
+        return /** @type {!Document} */ (
+            node.nodeType == NodeType.DOCUMENT ? node :
+                node.ownerDocument || node.document);
     };
 
     /**
@@ -74,57 +73,50 @@
      * @param {string} text The string that should replace the current element
      *     content.
      */
-    var setTextContent = function(element, text) {
-      if ('textContent' in element) {
-        element.textContent = text;
-      } else if (element.firstChild &&
-                 element.firstChild.nodeType == NodeType.TEXT) {
-        // If the first child is a text node we just change its data and remove the
-        // rest of the children.
-        while (element.lastChild != element.firstChild) {
-          element.removeChild(element.lastChild);
+    var setTextContent = function (element, text) {
+        if ('textContent' in element) {
+            element.textContent = text;
+        } else if (element.firstChild &&
+            element.firstChild.nodeType == NodeType.TEXT) {
+            // If the first child is a text node we just change its data and remove the
+            // rest of the children.
+            while (element.lastChild != element.firstChild) {
+                element.removeChild(element.lastChild);
+            }
+            element.firstChild.data = text;
+        } else {
+            removeChildren(element);
+            var doc = getOwnerDocument(element);
+            element.appendChild(doc.createTextNode(text));
         }
-        element.firstChild.data = text;
-      } else {
-        removeChildren(element);
-        var doc = getOwnerDocument(element);
-        element.appendChild(doc.createTextNode(text));
-      }
     };
 
 
-
-
-
     // app settings stored between sessions
-    var Settings = function()
-    {
+    var Settings = function () {
         this.currentPrinterName = "";
         this.printerUris = [];
     }
-    
+
     // loads settings
-    Settings.prototype.load = function()
-    {
+    Settings.prototype.load = function () {
         var currentPrinterName = Cookie.get('currentPrinterName');
         var printerUris = Cookie.get('printerUris');
-        
+
         if (currentPrinterName)
             this.currentPrinterName = currentPrinterName;
-            
+
         if (printerUris)
             this.printerUris = printerUris.split('|');
     }
-    
-    Settings.prototype.save = function()
-    {
-        Cookie.set('currentPrinterName', this.currentPrinterName, 24*365);
-        Cookie.set('printerUris', this.printerUris.join('|'), 24*365);
+
+    Settings.prototype.save = function () {
+        Cookie.set('currentPrinterName', this.currentPrinterName, 24 * 365);
+        Cookie.set('printerUris', this.printerUris.join('|'), 24 * 365);
     }
 
     // called when the document completly loaded
-    function onload()
-    {
+    function onload() {
         var printButton = document.getElementById('printButton');
         var printerSettingsButton = document.getElementById('printerSettingsButton');
         //var labelSettingsDiv = document.getElementById('labelSettingsDiv');
@@ -134,16 +126,15 @@
         var clearPrinterUriButton = document.getElementById('clearPrinterUriButton');
         var printersComboBox = document.getElementById('printersComboBox');
         var jobStatusMessageSpan = document.getElementById('jobStatusMessageSpan');
-        
-            
+
+
         var settings = new Settings();
-            
+
         // save settings to cookies
-        
-        function saveSettings()
-        {
+
+        function saveSettings() {
             settings.currentPrinterName = printersComboBox.value;
-            
+
             settings.save();
         }
 
@@ -151,8 +142,7 @@
         var printers = [];
 
         // loads all supported printers into a combo box 
-        function updatePrinters()
-        {
+        function updatePrinters() {
             // clear first
             removeChildren(printersComboBox);
             //while (printersComboBox.firstChild) 
@@ -165,8 +155,7 @@
             //    return;
             //}
 
-            for (var i = 0; i < printers.length; i++)
-            {
+            for (var i = 0; i < printers.length; i++) {
                 var printerName = printers[i].name;
 
                 var option = document.createElement('option');
@@ -178,7 +167,7 @@
                     printersComboBox.selectedIndex = i;
             }
 
-            printerSettingsDiv.style.display= printers.length == 0 ? 'block' : 'none';
+            printerSettingsDiv.style.display = printers.length == 0 ? 'block' : 'none';
         };
 
         var addressLabel = null;
@@ -186,8 +175,7 @@
         var DZLabel = null;
 
         // load DZ label xml
-        function getDZLabelXml()
-        {
+        function getDZLabelXml() {
             var labelXml = '<?xml version="1.0" encoding="utf-8"?>\n' +
                 '<DieCutLabel Version="8.0" Units="twips" MediaType="Default">\n' +
                 '  <PaperOrientation>Portrait</PaperOrientation>\n' +
@@ -345,8 +333,7 @@
         }
 
         // load address label xml
-        function getAddressLabelXml()
-        {
+        function getAddressLabelXml() {
             var labelXml = '<?xml version="1.0" encoding="utf-8"?>\
                                 <DieCutLabel Version="8.0" Units="twips" MediaType="Default">\
                                   <PaperOrientation>Landscape</PaperOrientation>\
@@ -615,8 +602,7 @@
         }
 
         // load tap label xml
-        function getTapeLabelXml()
-        {
+        function getTapeLabelXml() {
             var labelXml = '<?xml version="1.0" encoding="utf-8"?>\
                             <ContinuousLabel Version="8.0" Units="twips">\
                                 <PaperOrientation>Landscape</PaperOrientation>\
@@ -652,8 +638,7 @@
         }
 
         // load labels from the xml
-        function loadLabels()
-        {
+        function loadLabels() {
             // Get DZ Label
             DZLabel = dymo.label.framework.openLabelXml(getDZLabelXml());
 
@@ -664,19 +649,19 @@
             tapeLabel = dymo.label.framework.openLabelXml(getTapeLabelXml());
         }
 
-         
+
         // load settings from cookies
-        function loadSettings()
-        {
+        function loadSettings() {
             settings.load();
 
             // update printer uris
-            for (var i = 0; i < settings.printerUris.length; ++i)
-            {
+            for (var i = 0; i < settings.printerUris.length; ++i) {
                 var printerUri = settings.printerUris[i];
                 dymo.label.framework.addPrinterUri(printerUri, '',
                     updatePrinters,
-                    function() {alert('Unable to contact "' + printerUri + '"');});
+                    function () {
+                        alert('Unable to contact "' + printerUri + '"');
+                    });
             }
 
 
@@ -685,7 +670,7 @@
             //fixedLabelLengthTextBox.disabled = !settings.isFixedLabelLength;
             //printerIpAddressTextBox.value = settings.printerIpAddress;
         }
-        
+
 
         /*
         fixedLabelLengthCheckBox.onclick = function()
@@ -702,18 +687,15 @@
         }
         */
 
-        printerSettingsButton.onclick = function()
-        {
+        printerSettingsButton.onclick = function () {
             if (printerSettingsDiv.style.display == 'none')
                 printerSettingsDiv.style.display = 'block';
             else
-                printerSettingsDiv.style.display = 'none'; 
+                printerSettingsDiv.style.display = 'none';
         }
 
-        printButton.onclick = function()
-        {
-            try
-            {
+        printButton.onclick = function () {
+            try {
                 printButton.disabled = true;
 
                 settings.currentPrinterName = printersComboBox.value;
@@ -742,8 +724,7 @@
                 var objName9 = "";
                 var objName10 = "";
                 // if (printer.printerType == "LabelWriterPrinter")
-                if (printer.name == "SMALL LABEL")
-                {
+                if (printer.name == "SMALL LABEL") {
                     label = addressLabel;
                     objName = "TEXT1";
                     objName2 = "NAME1";
@@ -758,8 +739,7 @@
 
                 }
                 // else if (printer.printerType == "DZPrinter")
-                else if (printer.name == 'BIG LABEL')
-                {
+                else if (printer.name == 'BIG LABEL') {
                     label = DZLabel;
                     objName = "ID";
                     objName2 = "NAME";
@@ -767,9 +747,7 @@
                     objName5 = "CAT";
                     objName4 = "BARCODE";
 
-                }
-                else
-                {
+                } else {
                     label = tapeLabel;
                     objName = "Text";
                 }
@@ -785,30 +763,25 @@
 
                 var labelSet = new dymo.label.framework.LabelSetBuilder();
 
-                for (var i = 0; i < copies; ++i)
-            {
-                var record = labelSet.addRecord();
-                record.setText(objName, itemid);
-                record.setText(objName2, name);
-                record.setText(objName3, temp);
-                record.setText(objName4, itemid);
-                record.setText(objName5, cat);
-                record.setText(objName6, itemid);
-                record.setText(objName7, name);
-                record.setText(objName8, temp);
-                record.setText(objName9, itemid);
-                record.setText(objName10, cat);
-            }
-
-
-
+                for (var i = 0; i < copies; ++i) {
+                    var record = labelSet.addRecord();
+                    record.setText(objName, itemid);
+                    record.setText(objName2, name);
+                    record.setText(objName3, temp);
+                    record.setText(objName4, itemid);
+                    record.setText(objName5, cat);
+                    record.setText(objName6, itemid);
+                    record.setText(objName7, name);
+                    record.setText(objName8, temp);
+                    record.setText(objName9, itemid);
+                    record.setText(objName10, cat);
+                }
 
 
                 // print
                 //label.print(printer.name, null, labelSet.toString());
                 // print and get status
-                var printJob = label.printAndPollStatus(printer.name, null, labelSet.toString(), function(printJob, printJobStatus)
-                {
+                var printJob = label.printAndPollStatus(printer.name, null, labelSet.toString(), function (printJob, printJobStatus) {
                     // output status
                     var statusStr = 'Job Status: ' + printJobStatus.statusMessage;
 
@@ -827,46 +800,37 @@
 
                 }, 1000);
 
-                
+
                 saveSettings();
-            }
-            catch(e)
-            {
+            } catch (e) {
                 printButton.disabled = false;
                 alert(e.message || e);
-            } 
+            }
         }
 
-        addPrinterUriButton.onclick = function()
-        {
-            try
-            {
+        addPrinterUriButton.onclick = function () {
+            try {
                 var printerUri = printerUriTextBox.value;
                 if (!printerUri)
                     throw new Error("Specify printer Url");
 
                 dymo.label.framework.addPrinterUri(printerUri, '',
-                    function()
-                    {
+                    function () {
                         settings.printerUris.push(printerUri);
                         saveSettings();
                         updatePrinters();
                     },
-                    function() 
-                    {
+                    function () {
                         alert('Unable to connect to "' + printerUri + '"');
                     }
                 );
 
-            }
-            catch(e)
-            {
+            } catch (e) {
                 alert(e.message || e);
             }
         }
-        
-        clearPrinterUriButton.onclick = function()
-        {
+
+        clearPrinterUriButton.onclick = function () {
             dymo.label.framework.removeAllPrinterUri();
             settings.printerUris = [];
             saveSettings();
@@ -886,23 +850,21 @@
         //printerSettingsDiv.style.display= !settings.printerIpAddress ? 'block' : 'none';
     };
 
-   function initTests()
-	{
-		if(dymo.label.framework.init)
-		{
-			//dymo.label.framework.trace = true;
-			dymo.label.framework.init(onload);
-		} else {
-			onload();
-		}
-	}
+    function initTests() {
+        if (dymo.label.framework.init) {
+            //dymo.label.framework.trace = true;
+            dymo.label.framework.init(onload);
+        } else {
+            onload();
+        }
+    }
 
-	// register onload event
-	if (window.addEventListener)
-		window.addEventListener("load", initTests, false);
-	else if (window.attachEvent)
-		window.attachEvent("onload", initTests);
-	else
-		window.onload = initTests;
+    // register onload event
+    if (window.addEventListener)
+        window.addEventListener("load", initTests, false);
+    else if (window.attachEvent)
+        window.attachEvent("onload", initTests);
+    else
+        window.onload = initTests;
 
-} ());
+}());
